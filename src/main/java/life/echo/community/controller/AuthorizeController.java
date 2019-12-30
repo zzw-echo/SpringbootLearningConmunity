@@ -58,6 +58,8 @@ public class AuthorizeController {
             userMapper.insert(user);
             response.addCookie(new Cookie("token", token));
 
+            //用数据库实物的存储，代替session的写入
+
             /*//登录成功，写cookie 和session
             request.getSession().setAttribute("githubUser", githubUser);*/
 
