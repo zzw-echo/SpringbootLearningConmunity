@@ -1,5 +1,6 @@
 package life.echo.community.service;
 
+import life.echo.community.dto.PaginationDTO;
 import life.echo.community.dto.QuestionDTO;
 import life.echo.community.mapper.QuesstionMapper;
 import life.echo.community.mapper.UserMapper;
@@ -24,9 +25,14 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<QuestionDTO> list() {
-        List<Quesstion> quesstions = quesstionMapper.list();
+    public PaginationDTO list(Integer page, Integer size) {
+        //size * (page - 1)
+        Integer offset = size * (page - 1);
+
+        List<Quesstion> quesstions = quesstionMapper.list(offset, size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
+
+        PaginationDTO paginationDTO = new PaginationDTO();
         for (Quesstion quesstion : quesstions) {
             User user = userMapper.findById(quesstion.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -34,7 +40,11 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
+        paginationDTO.setQuestions(questionDTOList);
+        Integer totalCount = quesstionMapper.count();
 
-        return questionDTOList;
+        paginationDTO.setPagination(totalCount, page, size);
+
+        return paginationDTO;
     }
 }

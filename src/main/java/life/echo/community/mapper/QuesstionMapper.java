@@ -17,6 +17,9 @@ public interface QuesstionMapper {
     @Insert("insert into question (title, description, gmt_create, gmt_modified, creator, tag) values (#{title}, #{description}, #{gmtCreate}, #{gmtModified}, #{creator}, #{tag})")
     void create(Quesstion quesstion);
 
-    @Select("select * from question")
-    List<Quesstion> list();
+    @Select("select * from question limit #{offset}, #{size}")
+    List<Quesstion> list(Integer offset, Integer size);
+
+    @Select("select count(1) from question;")
+    Integer count();
 }
