@@ -1,7 +1,6 @@
 package life.echo.community.controller;
 
 import life.echo.community.dto.PaginationDTO;
-import life.echo.community.mapper.UserMapper;
 import life.echo.community.model.User;
 import life.echo.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

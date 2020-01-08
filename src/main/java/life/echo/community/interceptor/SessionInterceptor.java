@@ -3,6 +3,7 @@ package life.echo.community.interceptor;
 import life.echo.community.mapper.UserMapper;
 import life.echo.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by zhangzewen on 2020/1/8
  */
+@Service
 public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
