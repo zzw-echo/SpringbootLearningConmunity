@@ -61,11 +61,11 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public void list(Integer userId, Integer page, Integer size) {
+    public PaginationDTO list(Integer userId, Integer page, Integer size) {
 
 
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalCount = quesstionMapper.count();
+        Integer totalCount = quesstionMapper.countByUserId(userId);
         paginationDTO.setPagination(totalCount, page, size);
 
         if (page < 1) {
@@ -79,7 +79,7 @@ public class QuestionService {
         //size * (page - 1)
         Integer offset = size * (page - 1);
 
-        List<Quesstion> quesstions = quesstionMapper.list(userId, offset, size);
+        List<Quesstion> quesstions = quesstionMapper.listByUserId(userId, offset, size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
