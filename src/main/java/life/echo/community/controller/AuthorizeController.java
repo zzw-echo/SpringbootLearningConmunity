@@ -5,6 +5,7 @@ import life.echo.community.dto.GithubUser;
 import life.echo.community.mapper.UserMapper;
 import life.echo.community.model.User;
 import life.echo.community.provider.GithubProvider;
+import life.echo.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,9 @@ public class AuthorizeController {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code") String code,
