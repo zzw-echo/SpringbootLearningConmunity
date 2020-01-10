@@ -1,6 +1,7 @@
 package life.echo.community.service;
 
 import life.echo.community.mapper.UserMapper;
+import life.echo.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,4 +14,7 @@ public class UserService {
     private UserMapper userMapper;
 
 
+    public void createOrUpdate(User user) {
+
+    }
 }

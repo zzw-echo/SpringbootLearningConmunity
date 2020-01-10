@@ -2,7 +2,6 @@ package life.echo.community.controller;
 
 import life.echo.community.dto.AccessTokenDTO;
 import life.echo.community.dto.GithubUser;
-import life.echo.community.mapper.UserMapper;
 import life.echo.community.model.User;
 import life.echo.community.provider.GithubProvider;
 import life.echo.community.service.UserService;
@@ -32,9 +31,6 @@ public class AuthorizeController {
     private String redirectUri;
 
     @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
     private UserService userService;
 
     @GetMapping("/callback")
@@ -61,14 +57,12 @@ public class AuthorizeController {
             user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatar_url());
             //用数据库实物的存储，代替了session的写入
-            userMapper.insert(user);
+//            userMapper.insert(user);
+            userService.createOrUpdate(user);
             response.addCookie(new Cookie("token", token));
-
             //用数据库实物的存储，代替session的写入
-
             /*//登录成功，写cookie 和session
             request.getSession().setAttribute("githubUser", githubUser);*/
-
             return "redirect:/";
         }else {
             //登录失败，重新登录
