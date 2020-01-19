@@ -53,8 +53,7 @@ public class AuthorizeController {
             //name和id是从github获取的
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
+
             user.setAvatarUrl(githubUser.getAvatar_url());
             //用数据库实物的存储，代替了session的写入
 //            userMapper.insert(user);
