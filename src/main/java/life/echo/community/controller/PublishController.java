@@ -4,6 +4,7 @@ import life.echo.community.mapper.QuesstionMapper;
 import life.echo.community.mapper.UserMapper;
 import life.echo.community.model.Quesstion;
 import life.echo.community.model.User;
+import life.echo.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,28 +25,53 @@ public class PublishController {
     @Autowired
     private QuesstionMapper quesstionMapper;
 
+    @Autowired
+    private QuestionService questionService;
+
     @GetMapping("/publish")
     public String publish(){
         return "publish";
     }
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id")Integer id){
+    public String edit(@PathVariable(name = "id")Integer id,
+                       Model model){
+        Quesstion quesstion = quesstionMapper.getById(id);
+        model.addAttribute("title", quesstion.getTitle());
+        model.addAttribute("description", quesstion.getDescription());
+        model.addAttribute("tag", quesstion.getTag());
+        model.addAttribute("id", quesstion.getId());
         return "publish";
     }
 
     @PostMapping("/publish")
     public String doPublish(
-            @RequestParam("title") String title,
-            @RequestParam("description") String description,
-            @RequestParam("tag") String tag,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "tag", required = false) String tag,
             HttpServletRequest request,
-            Model model
-    ){
+            Model model){
+        model.addAttribute("title", title);
+        model.addAttribute("description", description);
+        model.addAttribute("tag", tag);
+
+        if (title == null || title == ""){
+            model.addAttribute("error", "title can not null ..");
+            return "publish";
+        }
+        if (description == null || description == ""){
+            model.addAttribute("error", "description can not null ..");
+            return "publish";
+        }
+        if (tag == null || tag == ""){
+            model.addAttribute("error", "tag can not null");
+            return "publish";
+        }
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             model.addAttribute("error", "用户未登录");
         }
+
         Quesstion quesstion = new Quesstion();
         quesstion.setTitle(title);
         quesstion.setDescription(description);
