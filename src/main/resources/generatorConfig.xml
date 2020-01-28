@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:E:/springbootLearing/db_h2"
+                        connectionURL="jdbc:h2:E:\springbootLearing\db_h2"
                         userId="root"
                         password="123">
         </jdbcConnection>
@@ -15,21 +15,21 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="life.echo.community.model" targetProject="\src\main\java">
+        <javaModelGenerator targetPackage="life.echo.community.model" targetProject="src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="mapper"  targetProject="\src\main\resource">
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src\main\resource">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="life.echo.community.mapper"
-                             targetProject="\src\main\java">
+                             targetProject="src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table schema="DB2ADMIN" tableName="user" domainObjectName="User" >
+        <table tableName="user" domainObjectName="User" >
         </table>
 
     </context>
