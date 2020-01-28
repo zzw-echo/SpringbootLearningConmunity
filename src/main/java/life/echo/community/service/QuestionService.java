@@ -106,4 +106,18 @@ public class QuestionService {
 
         return questionDTO;
     }
+
+    public void createOrUpdate(Quesstion quesstion) {
+        if (quesstion.getId() == null){
+            //创建
+            quesstion.setGmtCreate(System.currentTimeMillis());
+            quesstion.setGmtModified(quesstion.getGmtCreate());
+            quesstionMapper.create(quesstion);
+        }else{
+            //更新
+            quesstion.setGmtModified(quesstion.getGmtCreate());
+            quesstionMapper.update(quesstion);
+
+        }
+    }
 }

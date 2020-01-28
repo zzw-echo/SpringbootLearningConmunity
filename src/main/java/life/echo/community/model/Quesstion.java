@@ -17,4 +17,5 @@ public class Quesstion {
     private Integer viewCount;
     private Integer commnetCount;
     private Integer likeCount;
+
 }
