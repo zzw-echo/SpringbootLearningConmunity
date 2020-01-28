@@ -1,5 +1,6 @@
 package life.echo.community.controller;
 
+import life.echo.community.dto.QuestionDTO;
 import life.echo.community.mapper.QuesstionMapper;
 import life.echo.community.mapper.UserMapper;
 import life.echo.community.model.Quesstion;
@@ -23,9 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 public class PublishController {
 
     @Autowired
-    private QuesstionMapper quesstionMapper;
-
-    @Autowired
     private QuestionService questionService;
 
     @GetMapping("/publish")
@@ -36,7 +34,7 @@ public class PublishController {
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable(name = "id")Integer id,
                        Model model){
-        Quesstion quesstion = quesstionMapper.getById(id);
+        QuestionDTO quesstion = questionService.getById(id);
         model.addAttribute("title", quesstion.getTitle());
         model.addAttribute("description", quesstion.getDescription());
         model.addAttribute("tag", quesstion.getTag());
