@@ -28,6 +28,7 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
     private QuestionMapper questionMapper;
 
     public PaginationDTO list(Integer page, Integer size) {
