@@ -50,7 +50,6 @@ public class QuestionService {
         //size * (page - 1)
         Integer offset = size * (page - 1);
 
-
         List<Question> questions = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
 
         List<QuestionDTO> questionDTOList = new ArrayList<>();
@@ -96,11 +95,19 @@ public class QuestionService {
         //size * (page - 1)
         Integer offset = size * (page - 1);
 
-        List<Quesstion> quesstions = quesstionMapper.listByUserId(userId, offset, size);
+//        List<Quesstion> quesstions = quesstionMapper.listByUserId(userId, offset, size);
+
+
+        QuestionExample example = new QuestionExample();
+        example.createCriteria()
+                .andCreatorEqualTo(userId);
+
+        List<Question> questions = questionMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));
+
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
-        for (Quesstion quesstion : quesstions) {
+        for (Question quesstion : questions) {
             User user = userMapper.selectByPrimaryKey(quesstion.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(quesstion, questionDTO);
@@ -115,7 +122,7 @@ public class QuestionService {
     }
 
     public QuestionDTO getById(Integer id) {
-        Quesstion quesstion = quesstionMapper.getById(id);
+        Question quesstion = questionMapper.selectByPrimaryKey(id);
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(quesstion, questionDTO);
         User user = userMapper.selectByPrimaryKey(quesstion.getCreator());
@@ -124,12 +131,12 @@ public class QuestionService {
         return questionDTO;
     }
 
-    public void createOrUpdate(Quesstion quesstion) {
+    public void createOrUpdate(Question quesstion) {
         if (quesstion.getId() == null){
             //创建
             quesstion.setGmtCreate(System.currentTimeMillis());
             quesstion.setGmtModified(quesstion.getGmtCreate());
-            quesstionMapper.create(quesstion);
+            questionMapper.insert(quesstion);
         }else{
             //更新
             quesstion.setGmtModified(quesstion.getGmtCreate());
