@@ -75,6 +75,8 @@ public class PublishController {
         quesstion.setTag(tag);
         quesstion.setCreator(user.getId());
 
+        //测试git快捷键
+
         quesstion.setId(id);
         questionService.createOrUpdate(quesstion);
         return "redirect:/";
