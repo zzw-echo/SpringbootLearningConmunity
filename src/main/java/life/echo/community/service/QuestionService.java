@@ -5,7 +5,6 @@ import life.echo.community.dto.QuestionDTO;
 import life.echo.community.mapper.QuesstionMapper;
 import life.echo.community.mapper.QuestionMapper;
 import life.echo.community.mapper.UserMapper;
-import life.echo.community.model.Quesstion;
 import life.echo.community.model.Question;
 import life.echo.community.model.QuestionExample;
 import life.echo.community.model.User;
@@ -139,8 +138,20 @@ public class QuestionService {
             questionMapper.insert(quesstion);
         }else{
             //更新
-            quesstion.setGmtModified(quesstion.getGmtCreate());
-            quesstionMapper.update(quesstion);
+//            quesstion.setGmtModified(quesstion.getGmtCreate());
+
+            Question updateQuestion = new Question();
+            updateQuestion.setGmtModified(System.currentTimeMillis());
+            updateQuestion.setTitle(quesstion.getTitle());
+            updateQuestion.setDescription(quesstion.getDescription());
+            updateQuestion.setTag(quesstion.getTag());
+
+            QuestionExample example = new QuestionExample();
+            example.createCriteria()
+                    .andIdEqualTo(quesstion.getId());
+
+            questionMapper.updateByExampleSelective(updateQuestion, example);
+//            quesstionMapper.update(quesstion);
 
         }
     }

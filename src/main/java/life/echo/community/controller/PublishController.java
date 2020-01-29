@@ -1,9 +1,8 @@
 package life.echo.community.controller;
 
 import life.echo.community.dto.QuestionDTO;
-import life.echo.community.mapper.QuesstionMapper;
-import life.echo.community.mapper.UserMapper;
 import life.echo.community.model.Quesstion;
+import life.echo.community.model.Question;
 import life.echo.community.model.User;
 import life.echo.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -71,7 +69,7 @@ public class PublishController {
             model.addAttribute("error", "用户未登录");
         }
 
-        Quesstion quesstion = new Quesstion();
+        Question quesstion = new Question();
         quesstion.setTitle(title);
         quesstion.setDescription(description);
         quesstion.setTag(tag);
