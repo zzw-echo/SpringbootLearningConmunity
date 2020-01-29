@@ -1,9 +1,10 @@
 package life.echo.community.mapper;
 
-import java.util.List;
 import life.echo.community.model.Question;
 import life.echo.community.model.QuestionExample;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface QuestionMapper {
     /**
