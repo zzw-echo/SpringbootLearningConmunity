@@ -2,6 +2,7 @@ package life.echo.community.service;
 
 import life.echo.community.dto.PaginationDTO;
 import life.echo.community.dto.QuestionDTO;
+import life.echo.community.exception.CustomizeException;
 import life.echo.community.mapper.QuesstionMapper;
 import life.echo.community.mapper.QuestionMapper;
 import life.echo.community.mapper.UserMapper;
@@ -116,13 +117,14 @@ public class QuestionService {
         }
         paginationDTO.setQuestions(questionDTOList);
 
-
-
         return paginationDTO;
     }
 
     public QuestionDTO getById(Integer id) {
         Question quesstion = questionMapper.selectByPrimaryKey(id);
+        if (quesstion == null) {
+            throw new CustomizeException("你找到的问题不在了，请换个问题试试 ..");
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(quesstion, questionDTO);
         User user = userMapper.selectByPrimaryKey(quesstion.getCreator());
@@ -151,7 +153,10 @@ public class QuestionService {
             example.createCriteria()
                     .andIdEqualTo(quesstion.getId());
 
-            questionMapper.updateByExampleSelective(updateQuestion, example);
+            int update = questionMapper.updateByExampleSelective(updateQuestion, example);
+            if (update != 1){
+                throw new CustomizeException("你找到的问题不在了，请换个问题试试 ..");
+            }
 //            quesstionMapper.update(quesstion);
 
         }
