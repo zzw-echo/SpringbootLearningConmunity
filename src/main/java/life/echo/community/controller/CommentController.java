@@ -18,6 +18,7 @@ public class CommentController {
     @Autowired
     private CommentMapper commentMapper;
 
+
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public Object post(@RequestBody CommentDTO commentDTO) {
         Comment comment = new Comment();
