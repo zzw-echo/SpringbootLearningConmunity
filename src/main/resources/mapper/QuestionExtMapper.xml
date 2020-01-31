@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="life.echo.community.mapper.QuestionMapper">
+<mapper namespace="life.echo.community.mapper.QuestionExtMapper">
   <resultMap id="BaseResultMap" type="life.echo.community.model.Question">
 
     <id column="ID" jdbcType="INTEGER" property="id" />
@@ -13,10 +13,10 @@
     <result column="LIKE_COUNT" jdbcType="INTEGER" property="likeCount" />
     <result column="TAG" jdbcType="VARCHAR" property="tag" />
   </resultMap>
-  <update id="incView" parameterType="map">
+  <update id="incView" parameterType="life.echo.community.model.Question">
     update QUESTION
     set
-    VIEW_COUNT = VIEW_COUNT + #{record.viewCount,jdbcType=INTEGER}
-    where id = #{record.id}
+    VIEW_COUNT = VIEW_COUNT + #{viewCount,jdbcType=INTEGER}
+    where id = #{id}
   </update>
 </mapper>
