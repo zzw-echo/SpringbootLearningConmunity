@@ -2,6 +2,7 @@ package life.echo.community.service;
 
 import life.echo.community.dto.PaginationDTO;
 import life.echo.community.dto.QuestionDTO;
+import life.echo.community.exception.CustomizeErrorCode;
 import life.echo.community.exception.CustomizeException;
 import life.echo.community.mapper.QuesstionMapper;
 import life.echo.community.mapper.QuestionMapper;
@@ -123,7 +124,7 @@ public class QuestionService {
     public QuestionDTO getById(Integer id) {
         Question quesstion = questionMapper.selectByPrimaryKey(id);
         if (quesstion == null) {
-            throw new CustomizeException("你找到的问题不在了，请换个问题试试 ..");
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(quesstion, questionDTO);
@@ -155,7 +156,7 @@ public class QuestionService {
 
             int update = questionMapper.updateByExampleSelective(updateQuestion, example);
             if (update != 1){
-                throw new CustomizeException("你找到的问题不在了，请换个问题试试 ..");
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
 //            quesstionMapper.update(quesstion);
 
