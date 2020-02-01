@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by zhangzewen on 2020/1/31
  */
@@ -32,8 +35,9 @@ public class CommentController {
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setCommentator(1);
         comment.setLikeCount(0L);
-
         commentMapper.insert(comment);
-        return null;
+        Map<Object, Object> map = new HashMap<>();
+        map.put("message","成功");
+        return map;
     }
 }
