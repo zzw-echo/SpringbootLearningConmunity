@@ -27,7 +27,7 @@ public class CustomizeExceptionHandler {
 //        HttpStatus status = getStatus(request);
         String contentType = request.getContentType();
         if ("application/json".equals(contentType)) {
-            ResultDTO resultDTO = null;
+            ResultDTO resultDTO;
             //返回json
             if (e instanceof CustomizeException) {
                 resultDTO = ResultDTO.errorOf((CustomizeException)e);
@@ -37,13 +37,15 @@ public class CustomizeExceptionHandler {
             }
 
             try {
+                response.setContentType("application/json");
+                response.setStatus(200);
                 response.setCharacterEncoding("utf-8");
                 PrintWriter writer = response.getWriter();
                 writer.write(JSON.toJSONString(resultDTO));
                 writer.close();
             } catch (IOException ioe) {
             }
-
+            return null;
         } else {
             //错误页面跳转
             if (e instanceof CustomizeException) {
