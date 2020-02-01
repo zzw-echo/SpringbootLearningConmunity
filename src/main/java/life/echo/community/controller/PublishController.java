@@ -1,7 +1,6 @@
 package life.echo.community.controller;
 
 import life.echo.community.dto.QuestionDTO;
-import life.echo.community.model.Quesstion;
 import life.echo.community.model.Question;
 import life.echo.community.model.User;
 import life.echo.community.service.QuestionService;
@@ -30,7 +29,7 @@ public class PublishController {
     }
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id")Integer id,
+    public String edit(@PathVariable(name = "id") Long id,
                        Model model){
         QuestionDTO quesstion = questionService.getById(id);
         model.addAttribute("title", quesstion.getTitle());
@@ -45,7 +44,7 @@ public class PublishController {
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "tag", required = false) String tag,
-            @RequestParam(value = "id", required = false) Integer id,
+            @RequestParam(value = "id", required = false) Long id,
             HttpServletRequest request,
             Model model){
         model.addAttribute("title", title);
