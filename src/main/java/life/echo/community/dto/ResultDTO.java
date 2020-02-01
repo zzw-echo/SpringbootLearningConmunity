@@ -1,6 +1,7 @@
 package life.echo.community.dto;
 
 import life.echo.community.exception.CustomizeErrorCode;
+import life.echo.community.exception.CustomizeException;
 import lombok.Data;
 
 /**
@@ -22,11 +23,16 @@ public class ResultDTO {
         return errorOf(errorCode.getCode(), errorCode.getMessage());
     }
 
+    public static ResultDTO errorOf(CustomizeException e) {
+        return errorOf(e.getCode(), e.getMessage());
+    }
+
     public static ResultDTO successOf(){
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setCode(200);
         resultDTO.setMessage("请求成功 ..");
         return resultDTO;
     }
+
 
 }
