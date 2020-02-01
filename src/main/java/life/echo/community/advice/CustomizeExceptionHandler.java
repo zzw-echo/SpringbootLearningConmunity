@@ -15,12 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 public class CustomizeExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    ModelAndView handle(Throwable e, Model model,
+    Object handle(Throwable e, Model model,
                         HttpServletRequest request) {
 //        HttpStatus status = getStatus(request);
         String contentType = request.getContentType();
         if ("application/json".equals(contentType)) {
             //返回json
+            return null;
         } else {
             //错误页面跳转
             if (e instanceof CustomizeException) {
