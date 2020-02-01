@@ -5,14 +5,12 @@ package life.echo.community.exception;
  */
 public enum CustomizeErrorCode implements ICustomizeErrorCode {
 
-    QUESTION_NOT_FOUND(2001,"你找到的问题不在了，请换个问题试试 ..");
+    QUESTION_NOT_FOUND(2001,"你找到的问题不在了，请换个问题试试 .."),
+    TARGET_NOT_FOUND(2002,"未选择任何评论进行回复 ..")
+    ;
 
     private String message;
     private Integer code;
-
-    CustomizeErrorCode(String message) {
-        this.message = message;
-    }
 
     CustomizeErrorCode(Integer code, String message) {
         this.message = message;
