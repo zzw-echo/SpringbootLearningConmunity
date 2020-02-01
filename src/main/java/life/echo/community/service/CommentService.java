@@ -36,6 +36,7 @@ public class CommentService {
             if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
+            commentMapper.insert(comment);
         } else {
             //回复问题
         }
