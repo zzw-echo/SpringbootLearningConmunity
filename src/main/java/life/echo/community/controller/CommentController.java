@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by zhangzewen on 2020/1/31
@@ -48,8 +46,7 @@ public class CommentController {
         comment.setCommentator(user.getId());
         comment.setLikeCount(0L);
         commentService.insert(comment);
-        Map<Object, Object> map = new HashMap<>();
-        map.put("message","成功");
-        return map;
+
+        return ResultDTO.successOf();
     }
 }

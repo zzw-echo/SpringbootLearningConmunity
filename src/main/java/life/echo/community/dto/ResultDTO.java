@@ -21,4 +21,12 @@ public class ResultDTO {
     public static ResultDTO errorOf(CustomizeErrorCode errorCode) {
         return errorOf(errorCode.getCode(), errorCode.getMessage());
     }
+
+    public static ResultDTO successOf(){
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setCode(200);
+        resultDTO.setMessage("请求成功 ..");
+        return resultDTO;
+    }
+
 }
