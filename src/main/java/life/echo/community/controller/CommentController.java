@@ -22,6 +22,14 @@ public class CommentController {
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public Object post(@RequestBody CommentDTO commentDTO) {
         Comment comment = new Comment();
+
+        comment.setParentId(commentDTO.getParentId());
+        comment.setContent(commentDTO.getContent());
+        comment.setType(commentDTO.getType());
+        comment.setGmtModified(System.currentTimeMillis());
+        comment.setGmtCreate(System.currentTimeMillis());
+        comment.setCommentator(1);
+
         commentMapper.insert(comment);
         return null;
     }
