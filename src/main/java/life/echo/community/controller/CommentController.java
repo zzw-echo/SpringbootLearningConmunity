@@ -5,6 +5,7 @@ import life.echo.community.dto.ResultDTO;
 import life.echo.community.mapper.CommentMapper;
 import life.echo.community.model.Comment;
 import life.echo.community.model.User;
+import life.echo.community.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,8 @@ public class CommentController {
     @Autowired
     private CommentMapper commentMapper;
 
+    @Autowired
+    private CommentService commentService;
 
     @ResponseBody
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
@@ -43,7 +46,7 @@ public class CommentController {
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setCommentator(user.getId());
         comment.setLikeCount(0L);
-        commentMapper.insert(comment);
+        commentService.insert(comment);
         Map<Object, Object> map = new HashMap<>();
         map.put("message","成功");
         return map;
