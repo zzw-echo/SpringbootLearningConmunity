@@ -1,5 +1,6 @@
 package life.echo.community.dto;
 
+import life.echo.community.exception.CustomizeErrorCode;
 import lombok.Data;
 
 /**
@@ -17,4 +18,7 @@ public class ResultDTO {
         return resultDTO;
     }
 
+    public static ResultDTO errorOf(CustomizeErrorCode errorCode) {
+        return errorOf(errorCode.getCode(), errorCode.getMessage());
+    }
 }

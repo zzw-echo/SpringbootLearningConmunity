@@ -2,6 +2,7 @@ package life.echo.community.controller;
 
 import life.echo.community.dto.CommentDTO;
 import life.echo.community.dto.ResultDTO;
+import life.echo.community.exception.CustomizeErrorCode;
 import life.echo.community.mapper.CommentMapper;
 import life.echo.community.model.Comment;
 import life.echo.community.model.User;
@@ -35,7 +36,7 @@ public class CommentController {
                        HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            return ResultDTO.errorOf(2002, "未登录不能进行评论，请先登录.. ");
+            return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
 
         Comment comment = new Comment();
