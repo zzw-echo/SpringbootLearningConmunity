@@ -8,6 +8,7 @@ mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/  
 https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-caching-provider-couchbase  
 https://github.com/codedrinker/letscode  
+https://api.jquery.com/  
   
 ------
 新年快乐！  
