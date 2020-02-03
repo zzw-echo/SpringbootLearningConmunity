@@ -1,4 +1,18 @@
 function post() {
     var questionId = $("#question_id").val();
-    console.log(questionId);
+    var content = $("#comment_content").val();
+    $.ajax({
+        type: "POST",
+        url: "/comment",
+        contentType: "application/json",
+        data: JSON.stringify({
+            "parentId":questionId,
+            "content":content,
+            "type":1
+        }),
+        success: function (response) {
+            console.log(response);
+        },
+        dataType: "json"
+    });
 }
