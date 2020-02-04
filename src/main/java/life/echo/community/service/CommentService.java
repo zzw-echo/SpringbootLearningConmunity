@@ -79,7 +79,7 @@ public class CommentService {
         }
 
         //获取去重的评论人
-        Set<Long> commentator = null;
+        Set<Long> commentator;
         commentator = comments.stream().map(comment -> comment.getCommentator()).collect(Collectors.toSet());
 //        commentator = comments.stream().map(Comment::getCommentator).collect(Collectors.toSet());
         List<Long> userIds = new ArrayList<>();
@@ -96,7 +96,7 @@ public class CommentService {
         List<CommentDTO> commentDTOs = comments.stream().map(comment -> {
             CommentDTO commentDTO = new CommentDTO();
             BeanUtils.copyProperties(comment, commentDTO);
-            commentDTO.setUser(userMap.get(comment.getGmtCreate()));
+            commentDTO.setUser(userMap.get(comment.getCommentator()));
             return commentDTO;
         }).collect(Collectors.toList());
 

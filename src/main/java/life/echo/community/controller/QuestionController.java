@@ -1,6 +1,5 @@
 package life.echo.community.controller;
 
-import life.echo.community.dto.CommentCreateDTO;
 import life.echo.community.dto.CommentDTO;
 import life.echo.community.dto.QuestionDTO;
 import life.echo.community.service.CommentService;
@@ -29,13 +28,11 @@ public class QuestionController {
     public String question(@PathVariable(name = "id") Long id,
                            Model model) {
         QuestionDTO questionDTO = questionService.getById(id);
-
         List<CommentDTO> comments = commentService.listByQuestionId(id);
-
         //累加阅读数
         questionService.incView(id);
-
         model.addAttribute("question", questionDTO);
+        model.addAttribute("comments", comments);
         return "question";
     }
 }
