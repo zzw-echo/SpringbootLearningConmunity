@@ -1,5 +1,6 @@
 package life.echo.community.service;
 
+import life.echo.community.dto.CommentDTO;
 import life.echo.community.enums.CommentTypeEnum;
 import life.echo.community.exception.CustomizeErrorCode;
 import life.echo.community.exception.CustomizeException;
@@ -7,10 +8,16 @@ import life.echo.community.mapper.CommentMapper;
 import life.echo.community.mapper.QuestionExtMapper;
 import life.echo.community.mapper.QuestionMapper;
 import life.echo.community.model.Comment;
+import life.echo.community.model.CommentExample;
 import life.echo.community.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by zhangzewen on 2020/2/1
@@ -37,7 +44,7 @@ public class CommentService {
             throw new CustomizeException(CustomizeErrorCode.TYPE_PARAM_WRONG);
         }
 
-        if (comment.getType() == CommentTypeEnum.COMMENT.getType()){
+        if (comment.getType() == CommentTypeEnum.COMMENT.getType()) {
             //回复评论
             Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
             if (dbComment == null) {
@@ -54,5 +61,20 @@ public class CommentService {
             question.setCommentCount(1);
             questionExtMapper.incCommentCount(question);
         }
+    }
+
+    public List<CommentDTO> listByQuestionId(Long id) {
+        CommentExample commentExample = new CommentExample();
+        commentExample.createCriteria()
+                .andParentIdEqualTo(id)
+                .andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
+        List<Comment> comments = commentMapper.selectByExample(commentExample);
+
+        if (comments.size() == 0) {
+            return new ArrayList<>();
+        }
+        Set<Long> commentator = comments.stream().map(comment -> comment.getCommentator()).collect(Collectors.toSet());
+
+        return null;
     }
 }
