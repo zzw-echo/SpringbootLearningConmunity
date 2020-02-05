@@ -53,6 +53,12 @@ body {
     margin-top: 0;
 }
 
+.comments {
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
 .menu {
     color: #999999;
     margin-top: 5px;
