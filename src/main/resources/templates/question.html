@@ -19,7 +19,7 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <!--正文-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h3><span th:text="${question.title}"></span></h3>
+                <h3 class="question-title"><span th:text="${question.title}"></span></h3>
                 <span class="text-desc">
                 作者：<span th:text="${question.user.name}"></span> |
                 发布时间：<span th:text="${#dates.format(question.gmtCreate, 'yyyy-MM-dd HH:mm:ss')}"></span> |
@@ -68,7 +68,10 @@
 
             <!--回复输入框-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>
+                    <span th:text="提交回复"></span>
+                </h4>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment-sp">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="comment_section">
                     <div class="media">
                         <div class="media-left">
