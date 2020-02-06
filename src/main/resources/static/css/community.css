@@ -73,6 +73,10 @@ body {
     margin-bottom: 15px;
 }
 
+.sub-comments .btn {
+    margin: 10px 0;
+}
+
 .menu {
     color: #999999;
     margin-top: 5px;
