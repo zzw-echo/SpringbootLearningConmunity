@@ -64,21 +64,15 @@ function collapseComments(e) {
         e.classList.remove("active");
     } else {
         $.getJSON("/comment/" + id, function (data) {
-            var commentBody = $("comment-body-" + id);
-            var items = [];
-            $.each(data.data, function (comment) {
+            var subCommentContainer = $("#comment-"+id);
+            $.each(data.data, function (index, comment) {
                 var c = $("<div/>", {
                     "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 comments",
                     html: comment.content
                 });
-                items.push(c);
+                subCommentContainer.prepend(c);
             });
 
-            $("<div/>", {
-                "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse sub-comments",
-                "id": "comment-" + id,
-                html: items.join("")
-            }).appendTo(commentBody);
             //展开二级评论
             comments.addClass("in");
             //标记二级评论展开状态
