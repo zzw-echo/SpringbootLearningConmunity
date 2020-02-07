@@ -25,6 +25,10 @@ body {
     margin-top: 25px;
 }
 
+.question-tag {
+    margin-right: 5px;
+}
+
 .text-desc {
     font-size: 12px;
     font-weight: normal;
@@ -92,7 +96,8 @@ body {
     font-size: 15px;
     cursor: pointer;
 }
-.menu .comment-icon :hover{
+
+.menu .comment-icon :hover {
     color: #499ef3;
 }
 
