@@ -179,4 +179,9 @@ public class QuestionService {
         questionExtMapper.incView(question);
     }
 
+    public List<QuestionDTO> selectRelated(QuestionDTO questionDTO) {
+
+
+        return null;
+    }
 }
