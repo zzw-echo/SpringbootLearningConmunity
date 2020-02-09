@@ -29,6 +29,10 @@ body {
     margin-right: 5px;
 }
 
+.question-wechat {
+    width: 100%;
+}
+
 .text-desc {
     font-size: 12px;
     font-weight: normal;
