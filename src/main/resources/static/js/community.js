@@ -114,6 +114,10 @@ function collapseComments(e) {
     }
 }
 
+function showSelectTag() {
+    $("#select-tag").show();
+}
+
 function selectTag(value) {
     var previous = $("#tag").val();
     if (previous.indexOf(value) == -1) {

@@ -37,24 +37,26 @@
                     <label for="tag">添加标签：</label>
                     <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"
                            autocomplete="off"
-                           placeholder="输入标签，以，分隔">
+                           placeholder="输入标签，以，分隔"
+                           onclick="showSelectTag()">
+                    <div id="select-tag" class="publish-tag-tab">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                                      data-toggle="tab">开发语言</a></li>
+                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                                       data-toggle="tab">开发语言</a>
+                            </li>
+                        </ul>
 
-                    <ul class="nav nav-tabs">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
-                                                                  data-toggle="tab">开发语言</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">开发语言</a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="home"><span class="label label-info"><span
-                                class="glyphicon glyphicon-tags" onclick="selectTag('Spring')">Spring</span></span>
-                        </div>
-                        <div role="tabpanel" class="tab-pane " id="profile"><span class="label label-info"><span
-                                class="glyphicon glyphicon-tags" onclick="selectTag('Java')">Java</span></span>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="home"><span class="label label-info"><span
+                                    class="glyphicon glyphicon-tags" onclick="selectTag('Spring')">Spring</span></span>
+                            </div>
+                            <div role="tabpanel" class="tab-pane " id="profile"><span class="label label-info"><span
+                                    class="glyphicon glyphicon-tags" onclick="selectTag('Java')">Java</span></span>
+                            </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="container-fluid">

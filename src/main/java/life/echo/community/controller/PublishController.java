@@ -24,18 +24,20 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish")
-    public String publish(){
+    public String publish() {
         return "publish";
     }
 
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable(name = "id") Long id,
-                       Model model){
+                       Model model) {
         QuestionDTO quesstion = questionService.getById(id);
         model.addAttribute("title", quesstion.getTitle());
         model.addAttribute("description", quesstion.getDescription());
         model.addAttribute("tag", quesstion.getTag());
         model.addAttribute("id", quesstion.getId());
+
+        model.addAttribute("tags", "");
         return "publish";
     }
 
@@ -46,20 +48,20 @@ public class PublishController {
             @RequestParam(value = "tag", required = false) String tag,
             @RequestParam(value = "id", required = false) Long id,
             HttpServletRequest request,
-            Model model){
+            Model model) {
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
 
-        if (title == null || title == ""){
+        if (title == null || title == "") {
             model.addAttribute("error", "title can not null ..");
             return "publish";
         }
-        if (description == null || description == ""){
+        if (description == null || description == "") {
             model.addAttribute("error", "description can not null ..");
             return "publish";
         }
-        if (tag == null || tag == ""){
+        if (tag == null || tag == "") {
             model.addAttribute("error", "tag can not null");
             return "publish";
         }
