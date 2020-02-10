@@ -2,6 +2,8 @@ package life.echo.community.service;
 
 import life.echo.community.dto.CommentDTO;
 import life.echo.community.enums.CommentTypeEnum;
+import life.echo.community.enums.NotificationStatusEnum;
+import life.echo.community.enums.NotificationTypeEnum;
 import life.echo.community.exception.CustomizeErrorCode;
 import life.echo.community.exception.CustomizeException;
 import life.echo.community.mapper.*;
@@ -64,7 +66,8 @@ public class CommentService {
             parentComment.setId(comment.getParentId());
             parentComment.setCommentCount(1);
             commentExtMapper.incCommentCount(parentComment);
-
+            //创建通知
+            createNotify(comment, dbComment);
         } else {
             //回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -75,6 +78,17 @@ public class CommentService {
             question.setCommentCount(1);
             questionExtMapper.incCommentCount(question);
         }
+    }
+
+    private void createNotify(Comment comment, Comment dbComment) {
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setType(NotificationTypeEnum.REPLY_COMMENT.getType());
+        notification.setOuterid(comment.getParentId());
+        notification.setNotifier(comment.getCommentator());
+        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+        notification.setReceiver(dbComment.getCommentator());
+        notificationMapper.insert(notification);
     }
 
     public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum type) {

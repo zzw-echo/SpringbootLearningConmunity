@@ -24,7 +24,7 @@ public class CustomizeExceptionHandler {
     ModelAndView handle(Throwable e, Model model,
                         HttpServletRequest request,
                         HttpServletResponse response) {
-//        HttpStatus status = getStatus(request);
+//        HttpStatus status = getType(request);
         String contentType = request.getContentType();
         if ("application/json".equals(contentType)) {
             ResultDTO resultDTO;
@@ -61,7 +61,7 @@ public class CustomizeExceptionHandler {
 
 
 
-//    private HttpStatus getStatus(HttpServletRequest request) {
+//    private HttpStatus getType(HttpServletRequest request) {
 //        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
 //        if (statusCode == null) {
 //            return HttpStatus.INTERNAL_SERVER_ERROR;
