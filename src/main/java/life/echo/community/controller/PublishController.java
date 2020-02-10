@@ -1,9 +1,11 @@
 package life.echo.community.controller;
 
+import life.echo.community.cache.TagCache;
 import life.echo.community.dto.QuestionDTO;
 import life.echo.community.model.Question;
 import life.echo.community.model.User;
 import life.echo.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,8 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -36,8 +39,7 @@ public class PublishController {
         model.addAttribute("description", quesstion.getDescription());
         model.addAttribute("tag", quesstion.getTag());
         model.addAttribute("id", quesstion.getId());
-
-        model.addAttribute("tags", "");
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -52,6 +54,7 @@ public class PublishController {
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
+        model.addAttribute("tags", TagCache.get());
 
         if (title == null || title == "") {
             model.addAttribute("error", "title can not null ..");
@@ -65,6 +68,13 @@ public class PublishController {
             model.addAttribute("error", "tag can not null");
             return "publish";
         }
+
+        String invalid = TagCache.filterInvalid(tag);
+        if (StringUtils.isNotBlank(invalid)) {
+            model.addAttribute("error", "输入非法标签：" + invalid);
+            return "publish";
+        }
+
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             model.addAttribute("error", "用户未登录");
