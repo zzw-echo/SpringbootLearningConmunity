@@ -2,10 +2,12 @@ package life.echo.community.service;
 
 import life.echo.community.dto.NotificationDTO;
 import life.echo.community.dto.PaginationDTO;
+import life.echo.community.enums.NotificationTypeEnum;
 import life.echo.community.mapper.NotificationMapper;
 import life.echo.community.mapper.UserMapper;
 import life.echo.community.model.*;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +56,19 @@ public class NotificationService {
         example.createCriteria()
                 .andReceiverEqualTo(userId);
         List<Notification> notifications = notificationMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));
+
+        if (notifications.size() == 0){
+            return paginationDTO;
+        }
+
         List<NotificationDTO> notificationDTOS = new ArrayList<>();
+
+        for (Notification notification : notifications) {
+            NotificationDTO notificationDTO = new NotificationDTO();
+            BeanUtils.copyProperties(notification, notificationDTO);
+            notificationDTO.setType(NotificationTypeEnum.nameOfType(notification.getType()));
+            notificationDTOS.add(notificationDTO);
+        }
 
         paginationDTO.setData(notificationDTOS);
         return paginationDTO;
