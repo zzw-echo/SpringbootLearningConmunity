@@ -12,6 +12,10 @@
     <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/community.js" type="application/javascript"></script>
     <script src="/js/moment.js" type="application/javascript"></script>
+    <script src="/editormd/editormd.js" type="application/javascript"></script>
+    <script src="/editormd/lib/marked.min.js" type="application/javascript"></script>
+    <script src="/editormd/lib/prettify.min.js" type="application/javascript"></script>
+
 
 </head>
 <body>
@@ -30,7 +34,14 @@
                </span>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!--内容-->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view" >
+                    <textarea style="display: none;" th:text="${question.description}">### hello world .. </textarea>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        editormd.markdownToHTML("question-view", {});
+                    });
+                </script>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!--标签-->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
