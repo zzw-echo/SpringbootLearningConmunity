@@ -19,7 +19,7 @@
     }
 </script>
 <body>
-<div th:insert="navigation::nav"></div>
+<div th:insert="~{navigation::nav}"></div>
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
@@ -77,11 +77,15 @@
             </nav>
 
         </div>
+
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3>热门话题</h3>
-            谢邀,人在美国,刚下飞机。利益相关,圈子太小,匿了。
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>扫码打钱！</h4>
+                <img class="img-thumbnail question-wechat" src="/images/wechat2.png">
+            </div>
         </div>
     </div>
 </div>
+<div th:insert="~{footer::foot}"></div>
 </body>
 </html>
