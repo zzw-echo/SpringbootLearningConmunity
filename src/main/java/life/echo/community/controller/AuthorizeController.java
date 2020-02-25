@@ -5,6 +5,7 @@ import life.echo.community.dto.GithubUser;
 import life.echo.community.model.User;
 import life.echo.community.provider.GithubProvider;
 import life.echo.community.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.UUID;
  * Created by zhangzewen on 2019/12/21
  */
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Autowired
@@ -47,7 +49,7 @@ public class AuthorizeController {
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser githubUser = githubProvider.getUser(accessToken);
-        if (githubUser != null){
+        if (githubUser != null && githubUser.getId() != null){
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
@@ -66,6 +68,7 @@ public class AuthorizeController {
             return "redirect:/";
         }else {
             //登录失败，重新登录
+            log.error("callback get github error,{}",githubUser);
             return "redirect:/";
         }
     }
